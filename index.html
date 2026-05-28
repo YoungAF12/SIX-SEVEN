@@ -1,115 +1,311 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Цифровой Маркетплейс</title>
-<style>
-    :root {
-        --bg-color: #121212; /* Глубокий черный */
-        --panel-bg: #1e1e1e;
-        --primary-color: #ff9800; /* Мягко-оранжевый */
-        --primary-hover: #e68a00;
-        --text-main: #ffffff;
-        --text-muted: #aaaaaa;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная - Маркетплейс Цифровых Товаров</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0a0a0c;      /* Очень глубокий черный */
+            --bg-panel: #16161a;     /* Темно-серый для панелей */
+            --bg-hover: #222227;     /* Цвет при наведении */
+            --accent: #f5a623;       /* Мягкий оранжевый */
+            --accent-hover: #e0931d;
+            --text-main: #ffffff;
+            --text-muted: #9ba1a6;
+            --border-color: #2c2c35;
+        }
 
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-main);
-        margin: 0;
-        padding: 20px;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-    .container { max-width: 800px; margin: 0 auto; }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
 
-    .card {
-        background-color: var(--panel-bg);
-        border-radius: 12px;
-        padding: 25px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        border: 1px solid #333;
-    }
+        /* --- ШАПКА САЙТА (HEADER) --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: rgba(22, 22, 26, 0.8);
+            backdrop-filter: blur(10px); /* Эффект матового стекла */
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    h2 { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
 
-    .form-group { margin-bottom: 15px; }
-    label { display: block; margin-bottom: 5px; color: var(--text-muted); }
-    
-    input[type="text"], input[type="number"], select, textarea {
-        width: 100%;
-        padding: 10px;
-        background-color: var(--bg-color);
-        border: 1px solid #444;
-        color: var(--text-main);
-        border-radius: 6px;
-        box-sizing: border-box;
-    }
+        /* Центральная часть: Категории + Поиск */
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
 
-    input:focus, textarea:focus { outline: none; border-color: var(--primary-color); }
+        .categories {
+            display: flex;
+            gap: 20px;
+        }
 
-    button {
-        background-color: var(--primary-color);
-        color: #000;
-        border: none;
-        padding: 12px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        width: 100%;
-    }
+        .categories a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s ease;
+        }
 
-    button:hover { background-color: var(--primary-hover); }
+        .categories a:hover {
+            color: var(--accent);
+        }
 
-    .qr-mockup {
-        text-align: center;
-        margin-top: 20px;
-        padding: 20px;
-        border: 2px dashed var(--primary-color);
-        border-radius: 12px;
-        display: none; /* Скрыто до нажатия кнопки */
-    }
-</style>
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 5px 15px;
+            width: 300px;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar:focus-within {
+            border-color: var(--accent);
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            padding: 8px 0;
+            width: 100%;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .search-bar button:hover {
+            color: var(--accent);
+        }
+
+        /* Правая часть: Авторизация */
+        .auth-btn {
+            background-color: var(--accent);
+            color: #000;
+            border: none;
+            padding: 10px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .auth-btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
+        }
+
+        /* --- ОСНОВНОЙ КОНТЕНТ (СЕТКА ТОВАРОВ ДЛЯ ПРИМЕРА) --- */
+        .main-content {
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            border-color: var(--accent);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 150px;
+            background-color: var(--bg-hover);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* --- ПЛАВАЮЩАЯ КОРЗИНА --- */
+        .floating-cart {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: var(--bg-panel);
+            border: 2px solid var(--accent);
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .floating-cart:hover {
+            transform: scale(1.1);
+            background-color: var(--accent);
+        }
+
+        .floating-cart:hover svg {
+            fill: #000; /* Меняем цвет иконки при наведении */
+        }
+
+        .floating-cart svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--accent);
+            transition: fill 0.3s ease;
+        }
+
+        /* Счетчик товаров на корзине */
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff3b30;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid var(--bg-panel);
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="card">
-        <h2>Панель продавца: Добавление товара</h2>
-        <div class="form-group">
-            <label>Название (например: Ключ Windows 11 или Аккаунт Steam)</label>
-            <input type="text" placeholder="Введите название товара">
+    <header>
+        <div class="logo">GGCLONE</div>
+        
+        <div class="header-center">
+            <nav class="categories">
+                <a href="#">Игры</a>
+                <a href="#">Программы</a>
+                <a href="#">Ключи</a>
+                <a href="#">Аккаунты</a>
+                <a href="#">Пополнение</a>
+            </nav>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Поиск игр и софта...">
+                <button aria-label="Искать">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Тип товара</label>
-            <select>
-                <option>Ключ активации</option>
-                <option>Программа / Софт</option>
-                <option>Игровой аккаунт</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Скрытое содержимое (выдается после оплаты)</label>
-            <textarea rows="4" placeholder="XXXX-XXXX-XXXX-XXXX или ссылка на скачивание"></textarea>
-        </div>
-        <div class="form-group">
-            <label>Цена (₽)</label>
-            <input type="number" placeholder="999">
-        </div>
-        <button onclick="document.getElementById('qr-section').style.display='block'">Сохранить и выставить на продажу</button>
-    </div>
 
-    <div class="card qr-mockup" id="qr-section" style="margin-top: 20px;">
-        <h2>Оплата по СБП</h2>
-        <p style="color: var(--text-muted);">Отсканируйте QR-код в приложении вашего банка</p>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Mockup" alt="QR СБП">
-        <p>Сумма к оплате: <strong>999 ₽</strong></p>
-        <button style="background-color: #28a745; color: white;">Эмулировать успешную оплату</button>
+        <div class="header-right">
+            <button class="auth-btn">Войти</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <h2 class="section-title">Популярные товары</h2>
+        
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">Обложка игры/софта</div>
+                <div class="product-title">Ключ Windows 11 Pro (ОЕМ)</div>
+                <div class="product-price">399 ₽</div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">Обложка игры/софта</div>
+                <div class="product-title">Случайный Steam Ключ (Gold)</div>
+                <div class="product-price">49 ₽</div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">Обложка игры/софта</div>
+                <div class="product-title">Minecraft: Java & Bedrock</div>
+                <div class="product-price">1 499 ₽</div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">Обложка игры/софта</div>
+                <div class="product-title">Аккаунт GTA V + RDR 2</div>
+                <div class="product-price">850 ₽</div>
+            </div>
+        </div>
+    </main>
+
+    <div class="floating-cart" title="Корзина">
+        <div class="cart-badge">2</div>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C20.96 5.34 21 5.17 21 5C21 4.45 20.55 4 20 4H5.21L4.27 2H1ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z"/>
+        </svg>
     </div>
-</div>
 
 </body>
 </html>
