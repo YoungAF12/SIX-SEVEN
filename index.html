@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная - Маркетплейс Цифровых Товаров</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Кибер-Маркетплейс</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #0a0a0c;      /* Очень глубокий черный */
-            --bg-panel: #16161a;     /* Темно-серый для панелей */
-            --bg-hover: #222227;     /* Цвет при наведении */
-            --accent: #f5a623;       /* Мягкий оранжевый */
-            --accent-hover: #e0931d;
-            --text-main: #ffffff;
-            --text-muted: #9ba1a6;
-            --border-color: #2c2c35;
+            --bg-main: #0D0303;      /* Глубокий темный фон */
+            --bg-panel: #1a0a0a;     /* Чуть светлее для карточек */
+            --text-main: #EFF8FF;    /* Ледяной белый текст */
+            --text-muted: #88929b;
+            --accent-lime: #BBEF1F;  /* Неоновый лайм */
+            --accent-pink: #FF0055;  /* Неоновый розовый */
         }
 
         * {
@@ -30,110 +28,86 @@
             min-height: 100vh;
         }
 
-        /* --- ШАПКА САЙТА (HEADER) --- */
+        /* --- ШАПКА --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
-            background-color: rgba(22, 22, 26, 0.8);
-            backdrop-filter: blur(10px); /* Эффект матового стекла */
-            border-bottom: 1px solid var(--border-color);
+            padding: 20px 40px;
+            background-color: rgba(13, 3, 3, 0.9);
+            border-bottom: 2px solid var(--accent-pink);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--accent);
-            cursor: pointer;
-            letter-spacing: 1px;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--accent-lime);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(187, 239, 31, 0.4);
         }
 
-        /* Центральная часть: Категории + Поиск */
         .header-center {
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 40px;
         }
 
-        .categories {
-            display: flex;
-            gap: 20px;
-        }
-
+        .categories { display: flex; gap: 20px; }
         .categories a {
             color: var(--text-main);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 15px;
-            transition: color 0.2s ease;
+            transition: color 0.3s;
         }
-
-        .categories a:hover {
-            color: var(--accent);
-        }
+        .categories a:hover { color: var(--accent-pink); }
 
         .search-bar {
             display: flex;
             align-items: center;
             background-color: var(--bg-main);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 5px 15px;
-            width: 300px;
-            transition: border-color 0.3s;
-        }
-
-        .search-bar:focus-within {
-            border-color: var(--accent);
+            border: 1px solid var(--accent-lime);
+            border-radius: 4px;
+            padding: 8px 15px;
+            width: 350px;
+            box-shadow: 0 0 5px rgba(187, 239, 31, 0.2);
         }
 
         .search-bar input {
             background: transparent;
             border: none;
             color: var(--text-main);
-            padding: 8px 0;
             width: 100%;
             outline: none;
             font-size: 14px;
         }
+        
+        .search-bar input::placeholder { color: var(--text-muted); }
 
-        .search-bar button {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 16px;
-            transition: color 0.2s;
-        }
-
-        .search-bar button:hover {
-            color: var(--accent);
-        }
-
-        /* Правая часть: Авторизация */
         .auth-btn {
-            background-color: var(--accent);
+            background-color: var(--accent-lime);
             color: #000;
             border: none;
-            padding: 10px 24px;
+            padding: 10px 25px;
             font-size: 15px;
-            font-weight: 600;
-            border-radius: 8px;
+            font-weight: 800;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
         }
 
         .auth-btn:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
+            background-color: var(--text-main);
+            box-shadow: 0 0 15px var(--accent-lime);
+            transform: scale(1.05);
         }
 
-        /* --- ОСНОВНОЙ КОНТЕНТ (СЕТКА ТОВАРОВ ДЛЯ ПРИМЕРА) --- */
+        /* --- КОНТЕНТ --- */
         .main-content {
             padding: 40px;
             max-width: 1400px;
@@ -141,55 +115,82 @@
         }
 
         .section-title {
-            font-size: 28px;
-            margin-bottom: 25px;
-            font-weight: 600;
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-left: 5px solid var(--accent-pink);
+            padding-left: 15px;
         }
 
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
 
         .product-card {
             background-color: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border: 1px solid #333;
+            border-radius: 8px;
             padding: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .product-card:hover {
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            border-color: var(--accent);
         }
 
         .product-image {
             width: 100%;
-            height: 150px;
-            background-color: var(--bg-hover);
-            border-radius: 8px;
-            margin-bottom: 15px;
+            height: 160px;
+            background-color: #111;
+            border-radius: 4px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-muted);
-            font-size: 14px;
+            border: 1px dashed #444;
         }
 
         .product-title {
             font-size: 16px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            height: 40px;
+        }
+
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .product-price {
-            font-size: 18px;
-            color: var(--accent);
-            font-weight: 700;
+            font-size: 22px;
+            color: var(--accent-lime);
+            font-weight: 800;
+        }
+
+        .buy-btn {
+            background-color: transparent;
+            border: 1px solid var(--accent-pink);
+            color: var(--accent-pink);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .buy-btn:hover {
+            background-color: var(--accent-pink);
+            color: #fff;
         }
 
         /* --- ПЛАВАЮЩАЯ КОРЗИНА --- */
@@ -198,114 +199,238 @@
             bottom: 40px;
             right: 40px;
             background-color: var(--bg-panel);
-            border: 2px solid var(--accent);
-            width: 65px;
-            height: 65px;
+            border: 2px solid var(--accent-lime);
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             cursor: pointer;
             z-index: 1000;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .floating-cart:hover {
-            transform: scale(1.1);
-            background-color: var(--accent);
+            background-color: var(--accent-lime);
+            box-shadow: 0 0 20px var(--accent-lime);
         }
 
-        .floating-cart:hover svg {
-            fill: #000; /* Меняем цвет иконки при наведении */
-        }
-
+        .floating-cart:hover svg { fill: #000; }
+        
         .floating-cart svg {
-            width: 28px;
-            height: 28px;
-            fill: var(--accent);
+            width: 30px;
+            height: 30px;
+            fill: var(--accent-lime);
             transition: fill 0.3s ease;
         }
 
-        /* Счетчик товаров на корзине */
         .cart-badge {
             position: absolute;
             top: -5px;
             right: -5px;
-            background-color: #ff3b30;
-            color: white;
-            font-size: 12px;
+            background-color: var(--accent-pink);
+            color: #fff;
+            font-size: 14px;
             font-weight: bold;
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 2px solid var(--bg-panel);
+            border: 2px solid var(--bg-main);
         }
+
+        /* --- МОДАЛЬНОЕ ОКНО (ВХОД) --- */
+        .modal-overlay {
+            display: none; /* Скрыто по умолчанию */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(13, 3, 3, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active { display: flex; } /* Класс для показа окна */
+
+        .modal-box {
+            background: var(--bg-panel);
+            border: 2px solid var(--accent-pink);
+            padding: 40px;
+            border-radius: 8px;
+            width: 400px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.2);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px; right: 15px;
+            background: none; border: none;
+            color: var(--text-muted);
+            font-size: 24px; cursor: pointer;
+        }
+        
+        .modal-close:hover { color: var(--accent-pink); }
+
+        .modal-box h3 {
+            margin-bottom: 20px;
+            color: var(--text-main);
+            font-size: 24px;
+        }
+
+        .modal-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: var(--bg-main);
+            border: 1px solid #444;
+            color: var(--text-main);
+            border-radius: 4px;
+        }
+
+        .modal-box input:focus {
+            border-color: var(--accent-lime);
+            outline: none;
+        }
+
+        .modal-box button.login-submit {
+            width: 100%;
+            background: var(--accent-pink);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .modal-box button.login-submit:hover { background: #d00045; }
+
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">GGCLONE</div>
+        <div class="logo">Nexus Store</div>
         
         <div class="header-center">
             <nav class="categories">
                 <a href="#">Игры</a>
-                <a href="#">Программы</a>
+                <a href="#">Софт</a>
                 <a href="#">Ключи</a>
                 <a href="#">Аккаунты</a>
-                <a href="#">Пополнение</a>
             </nav>
             
             <div class="search-bar">
-                <input type="text" placeholder="Поиск игр и софта...">
-                <button aria-label="Искать">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </button>
+                <input type="text" placeholder="Поиск по каталогу...">
             </div>
         </div>
 
         <div class="header-right">
-            <button class="auth-btn">Войти</button>
+            <button class="auth-btn" id="loginBtn">Войти</button>
         </div>
     </header>
 
     <main class="main-content">
-        <h2 class="section-title">Популярные товары</h2>
+        <h2 class="section-title">В тренде</h2>
         
         <div class="products-grid">
             <div class="product-card">
-                <div class="product-image">Обложка игры/софта</div>
-                <div class="product-title">Ключ Windows 11 Pro (ОЕМ)</div>
-                <div class="product-price">399 ₽</div>
+                <div class="product-image">Обложка</div>
+                <div class="product-title">Ключ Windows 11 Pro</div>
+                <div class="card-bottom">
+                    <div class="product-price">399 ₽</div>
+                    <button class="buy-btn" onclick="addToCart()">В корзину</button>
+                </div>
             </div>
             <div class="product-card">
-                <div class="product-image">Обложка игры/софта</div>
-                <div class="product-title">Случайный Steam Ключ (Gold)</div>
-                <div class="product-price">49 ₽</div>
+                <div class="product-image">Обложка</div>
+                <div class="product-title">Случайный Steam Ключ</div>
+                <div class="card-bottom">
+                    <div class="product-price">49 ₽</div>
+                    <button class="buy-btn" onclick="addToCart()">В корзину</button>
+                </div>
             </div>
             <div class="product-card">
-                <div class="product-image">Обложка игры/софта</div>
+                <div class="product-image">Обложка</div>
                 <div class="product-title">Minecraft: Java & Bedrock</div>
-                <div class="product-price">1 499 ₽</div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">Обложка игры/софта</div>
-                <div class="product-title">Аккаунт GTA V + RDR 2</div>
-                <div class="product-price">850 ₽</div>
+                <div class="card-bottom">
+                    <div class="product-price">1 499 ₽</div>
+                    <button class="buy-btn" onclick="addToCart()">В корзину</button>
+                </div>
             </div>
         </div>
     </main>
 
-    <div class="floating-cart" title="Корзина">
-        <div class="cart-badge">2</div>
+    <div class="floating-cart" id="cartBtn" title="Корзина">
+        <div class="cart-badge" id="cartCount">0</div>
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C20.96 5.34 21 5.17 21 5C21 4.45 20.55 4 20 4H5.21L4.27 2H1ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z"/>
         </svg>
     </div>
 
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h3>Вход в аккаунт</h3>
+            <input type="text" placeholder="Email или Логин">
+            <input type="password" placeholder="Пароль">
+            <button class="login-submit" onclick="alert('Логика бэкенда пока не подключена!')">Продолжить</button>
+        </div>
+    </div>
+
+    <script>
+        // Логика модального окна входа
+        const loginBtn = document.getElementById('loginBtn');
+        const authModal = document.getElementById('authModal');
+        const closeModal = document.getElementById('closeModal');
+
+        // Открыть окно
+        loginBtn.addEventListener('click', () => {
+            authModal.classList.add('active');
+        });
+
+        // Закрыть окно при нажатии на крестик
+        closeModal.addEventListener('click', () => {
+            authModal.classList.remove('active');
+        });
+
+        // Закрыть окно при клике на темный фон вне окна
+        authModal.addEventListener('click', (e) => {
+            if (e.target === authModal) {
+                authModal.classList.remove('active');
+            }
+        });
+
+        // Логика корзины (счетчик)
+        let cartItems = 0;
+        const cartCountElement = document.getElementById('cartCount');
+
+        function addToCart() {
+            cartItems++;
+            cartCountElement.textContent = cartItems;
+            
+            // Небольшая анимация корзины при добавлении
+            const cartBtn = document.getElementById('cartBtn');
+            cartBtn.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                cartBtn.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Клик по самой корзине
+        document.getElementById('cartBtn').addEventListener('click', () => {
+            if(cartItems === 0) {
+                alert('Ваша корзина пуста!');
+            } else {
+                alert(`В корзине ${cartItems} товаров. Переход к оформлению...`);
+            }
+        });
+    </script>
 </body>
 </html>
