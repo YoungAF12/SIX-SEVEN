@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа - Nexus Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0D0303;
+            --bg-panel: #1a0a0a;
+            --text-main: #EFF8FF;
+            --text-muted: #88929b;
+            --accent-lime: #BBEF1F;
+            --accent-pink: #FF0055;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+        .checkout-container {
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .panel {
+            background-color: var(--bg-panel);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--accent-lime);
+            text-transform: uppercase;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        /* Форма данных */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-main);
+            border: 1px solid #444;
+            color: var(--text-main);
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-pink);
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.2);
+        }
+
+        /* Детали заказа */
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .total-price {
+            display: flex;
+            justify-content: space-between;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--accent-pink);
+            margin-top: 20px;
+            border-top: 1px dashed #444;
+            padding-top: 20px;
+        }
+
+        /* Кнопка оплаты */
+        .pay-btn {
+            width: 100%;
+            background-color: var(--accent-lime);
+            color: #000;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 800;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 30px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .pay-btn:hover {
+            background-color: var(--text-main);
+            box-shadow: 0 0 15px var(--accent-lime);
+        }
+
+        /* Секция QR кода (изначально скрыта) */
+        .qr-section {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .qr-box {
+            background: #fff;
+            padding: 15px;
+            display: inline-block;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 3px solid var(--accent-lime);
+        }
+
+        .qr-box img {
+            display: block;
+            width: 200px;
+            height: 200px;
+        }
+
+        .status-text {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 10px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        /* Окно успешной оплаты */
+        .success-message {
+            display: none;
+            text-align: center;
+            color: var(--accent-lime);
+        }
+
+        .success-message svg {
+            width: 60px;
+            height: 60px;
+            fill: var(--accent-lime);
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="checkout-container">
+        <div class="panel">
+            <h2>Данные для доставки</h2>
+            <div class="form-group">
+                <label>Email (куда придет товар)</label>
+                <input type="email" id="buyerEmail" placeholder="your@email.com">
+            </div>
+            
+            <div id="paymentStartBlock">
+                <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5; margin-top: 20px;">
+                    Нажимая кнопку «Перейти к оплате», ваши средства будут заморожены системой безопасной сделки. Продавец получит деньги только после того, как товар будет доставлен на ваш Email.
+                </p>
+                <button class="pay-btn" id="generateQrBtn">Оплатить через СБП</button>
+            </div>
+
+            <div class="qr-section" id="qrSection">
+                <h3 style="color: var(--text-main);">Оплата по СБП</h3>
+                <div class="qr-box">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SBPMockupPaymentNexus" alt="QR Code">
+                </div>
+                <p>Отсканируйте код в приложении банка</p>
+                <p class="status-text" id="paymentStatus">Ожидание поступления средств...</p>
+            </div>
+
+            <div class="success-message" id="successSection">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"/>
+                </svg>
+                <h3>Оплата прошла успешно!</h3>
+                <p style="color: var(--text-main); margin-top: 10px;">Средства заморожены. Товар отправлен на ваш Email.</p>
+                <button class="pay-btn" style="background-color: transparent; border: 1px solid var(--accent-pink); color: var(--accent-pink);" onclick="location.reload()">Вернуться на главную</button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Ваш заказ</h2>
+            <div class="order-item">
+                <span>Ключ Windows 11 Pro</span>
+                <span>399 ₽</span>
+            </div>
+            <div class="order-item">
+                <span style="color: var(--text-muted); font-size: 14px;">Комиссия маркетплейса</span>
+                <span style="color: var(--text-muted); font-size: 14px;">0 ₽</span>
+            </div>
+            
+            <div class="total-price">
+                <span>Итого к оплате:</span>
+                <span>399 ₽</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const generateQrBtn = document.getElementById('generateQrBtn');
+        const paymentStartBlock = document.getElementById('paymentStartBlock');
+        const qrSection = document.getElementById('qrSection');
+        const paymentStatus = document.getElementById('paymentStatus');
+        const successSection = document.getElementById('successSection');
+        const buyerEmail = document.getElementById('buyerEmail');
+
+        generateQrBtn.addEventListener('click', () => {
+            // Простейшая проверка, ввел ли пользователь email
+            if (!buyerEmail.value.includes('@')) {
+                alert('Пожалуйста, введите корректный Email для получения товара.');
+                return;
+            }
+
+            // Прячем кнопку, показываем QR
+            paymentStartBlock.style.display = 'none';
+            qrSection.style.display = 'block';
+
+            // Имитируем ожидание оплаты (например, пользователь сканирует код 4 секунды)
+            setTimeout(() => {
+                paymentStatus.textContent = 'Обработка платежа банком...';
+                paymentStatus.style.color = 'var(--accent-pink)';
+                
+                // Еще через 2 секунды платеж проходит (имитация вебхука из бэкенда)
+                setTimeout(() => {
+                    qrSection.style.display = 'none';
+                    successSection.style.display = 'block';
+                }, 2000);
+
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
