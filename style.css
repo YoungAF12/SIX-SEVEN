@@ -1,0 +1,65 @@
+/* style.css */
+:root {
+    --bg-main: #0D0303;      /* Глубокий темный */
+    --bg-panel: #1a0a0a;     /* Цвет карточек */
+    --text-main: #EFF8FF;    /* Ледяной белый */
+    --text-muted: #88929b;
+    --accent-lime: #BBEF1F;  /* Неоновый лайм */
+    --accent-pink: #FF0055;  /* Неоновый розовый */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Общий стиль для всех инпутов на сайте */
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--bg-main);
+    border: 1px solid #444;
+    color: var(--text-main);
+    border-radius: 4px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--accent-lime);
+    outline: none;
+    box-shadow: 0 0 8px rgba(187, 239, 31, 0.2);
+}
+
+/* Общий стиль для главных кнопок */
+.btn-primary {
+    background-color: var(--accent-lime);
+    color: #000;
+    border: none;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 800;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.btn-primary:hover {
+    background-color: var(--text-main);
+    box-shadow: 0 0 15px var(--accent-lime);
+}
