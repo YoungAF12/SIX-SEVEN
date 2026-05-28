@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавление товара - Панель продавца</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Специфичные стили только для этой страницы */
+        .seller-panel {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--accent-pink);
+            border-radius: 8px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.15);
+        }
+
+        .seller-panel h2 {
+            color: var(--accent-lime);
+            margin-bottom: 25px;
+            font-size: 24px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        label {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="seller-panel">
+        <h2>Панель продавца: Добавление товара</h2>
+        
+        <form id="addProductForm">
+            <div>
+                <label for="productName">Название (например: Ключ Windows 11 или Аккаунт Steam)</label>
+                <input type="text" id="productName" placeholder="Введите название товара" required>
+            </div>
+
+            <div>
+                <label for="productType">Тип товара</label>
+                <select id="productType">
+                    <option value="key">Ключ активации</option>
+                    <option value="software">Программа / Софт</option>
+                    <option value="account">Игровой аккаунт</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="hiddenContent">Скрытое содержимое (выдается после оплаты)</label>
+                <textarea id="hiddenContent" rows="4" placeholder="XXXX-XXXX-XXXX-XXXX или ссылка на скачивание" required></textarea>
+            </div>
+
+            <div>
+                <label for="productPrice">Цена (₽)</label>
+                <input type="number" id="productPrice" placeholder="999" min="1" required>
+            </div>
+
+            <button type="submit" class="btn-primary">Сохранить и выставить на продажу</button>
+        </form>
+    </div>
+
+    <script src="seller.js"></script>
+</body>
+</html>
