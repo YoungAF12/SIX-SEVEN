@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Контейнер с базой данных PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: photostudio_db
+    restart: always
+    environment:
+      POSTGRES_USER: studio_admin
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: photostudio
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Этот volume автоматически выполнит наш SQL скрипт при первом запуске
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+
+  # Легковесный веб-интерфейс для просмотра базы данных (вместо pgAdmin)
+  adminer:
+    image: adminer
+    container_name: photostudio_db_admin
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
